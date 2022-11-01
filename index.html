@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <div class="container mt-5 main-content">
+  <div class="container mt-5 main-container">
     <form action="javascript:void(0);">
       <div class="input-group mb-3">
         <input type="text" class="form-control" name="git-user" id="git-user" placeholder="Github username" aria-label="Github username" aria-describedby="basic-addon2" required>
@@ -37,11 +37,14 @@
           <small class="text-muted" id="following"></small> 
           <small class="text-muted"> following</small>
         </p>
-        <a href="#" class="btn btn-primary">Repositórios</a>
+        <a data-bs-toggle="collapse" href="#repo-container" role="button" aria-expanded="false" aria-controls="collapseRepos" class="btn btn-primary" id="get-repo">Repositórios</a>
       </div>
     </div>
-  </div>
+
+    <div class="collapse mt-5" id="repo-container"></div>
 </body>
+
 <script src="src/js/main.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>
