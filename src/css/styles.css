@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.avatar {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+  vertical-align: middle;
+  border-radius: 6px;
+  flex-shrink: 0;
+  width: 260;
+  height: 260;
+}
+
+.avatar-user {
+  border-radius: 50% !important;
+
+}
