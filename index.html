@@ -10,8 +10,22 @@
 </head>
 
 <body>
-  <div class="container"></div>
+  <div class="container">
+    <form action="javascript:void(0);">
+      <input type="text" name="git-user" id="git-user" required="required">
+      <button type="submit" id="search-btn">Search</button>
+    </form>
+
+    <div class="hide" id="user-container">
+      <img src="#" id="avatar_url" alt="Avatar URL">
+      <p id="name"></p>
+      <p id="login"></p>
+      <p id="bio"></p>
+      <p><span id="followers"></span> followers</p>
+      <p><span id="following"></span> following</p>
+    </div>
+  </div>
 </body>
-<script src="src/main.js"></script>
+<script src="src/js/main.js"></script>
 
 </html>
