@@ -60,6 +60,9 @@ const showRepos = (data) => {
 
 searchBtn.addEventListener('click', (e) => {
   if (gitUser.value.length !== 0) {
+    removeElementsByClass('card-repo')
+    repoContainer.classList.remove('repos')
+    
     const options = {
       method: 'GET',
       mode: 'cors',
@@ -72,8 +75,7 @@ searchBtn.addEventListener('click', (e) => {
           alert('User not found!')
           userContainer.classList.add('hide')
         }
-        removeElementsByClass('card-repo')
-        repoContainer.classList.remove('.repos') 
+         
 
         return response.json()
           .then(data => showData(data))
