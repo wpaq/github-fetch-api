@@ -5,24 +5,37 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GITHUB</title>
+  <title>Github | Fetch API</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="src/css/styles.css">
 </head>
 
 <body>
-  <div class="container">
+  <div class="container mt-5 main-content">
     <form action="javascript:void(0);">
-      <input type="text" name="git-user" id="git-user" required="required">
-      <button type="submit" id="search-btn">Search</button>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" name="git-user" id="git-user" placeholder="Github username" aria-label="Github username" aria-describedby="basic-addon2" required>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit" id="search-btn">Search</button>
+        </div>
+      </div>
     </form>
-
-    <div class="hide" id="user-container">
-      <img src="#" id="avatar_url" alt="Avatar URL">
-      <p id="name"></p>
-      <p id="login"></p>
-      <p id="bio"></p>
-      <p><span id="followers"></span> followers</p>
-      <p><span id="following"></span> following</p>
+    
+    <div class="card hide" id="user-container">
+      <img class="card-img-top" src="..." id="avatar_url" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title" id="name"></h5>
+        <h6 class="card-subtitle mb-2 text-muted" id="login"></h6>
+        <p class="card-text" id="bio"></p>
+        <p class="card-text">
+          <small class="text-muted" id="followers"></small> 
+          <small class="text-muted"> followers</small>
+          •
+          <small class="text-muted" id="following"></small> 
+          <small class="text-muted"> following</small>
+        </p>
+        <a href="#" class="btn btn-primary">Repositórios</a>
+      </div>
     </div>
   </div>
 </body>
