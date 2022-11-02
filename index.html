@@ -14,13 +14,16 @@
   <div class="container mt-5 main-container">
     <form action="javascript:void(0);">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" name="git-user" id="git-user" placeholder="Github username" aria-label="Github username" aria-describedby="basic-addon2" required>
+        <input type="text" class="form-control" name="git-user" id="git-user" placeholder="Github username"
+          aria-label="Github username" aria-describedby="basic-addon2" required>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="submit" id="search-btn">Search</button>
         </div>
       </div>
     </form>
-    
+
+    <span class="hide" id="user-not-found">User not found!</span>
+
     <div class="card hide" id="user-container">
       <img class="card-img-top" src="..." id="avatar_url" alt="Card image cap">
       <div class="card-body">
@@ -28,16 +31,17 @@
         <h6 class="card-subtitle mb-2 text-muted" id="login"></h6>
         <p class="card-text" id="bio"></p>
         <p class="card-text">
-          <small class="text-muted" id="public_repos"></small> 
+          <small class="text-muted" id="public_repos"></small>
           <small class="text-muted"> repos</small>
           •
-          <small class="text-muted" id="followers"></small> 
+          <small class="text-muted" id="followers"></small>
           <small class="text-muted"> followers</small>
           •
-          <small class="text-muted" id="following"></small> 
+          <small class="text-muted" id="following"></small>
           <small class="text-muted"> following</small>
         </p>
-        <a data-bs-toggle="collapse" href="#repo-container" role="button" aria-expanded="false" aria-controls="collapseRepos" class="btn btn-primary" id="get-repo">Repositórios</a>
+        <a data-bs-toggle="collapse" href="#repo-container" role="button" aria-expanded="false"
+          aria-controls="collapseRepos" class="btn btn-primary" id="get-repo">Repositórios</a>
       </div>
     </div>
 

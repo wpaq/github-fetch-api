@@ -9,10 +9,17 @@ const avatarUrl = document.querySelector('#avatar_url')
 const getRepo = document.querySelector('#get-repo')
 const gitName = document.querySelector('#git-name')
 
-function removeElementsByClass(className){
+// cors
+const options = {
+  method: 'GET',
+  mode: 'cors',
+  cache: 'default'
+}
+
+function removeElementsByClass(className) {
   const elements = document.getElementsByClassName(className);
-  while(elements.length > 0){
-      elements[0].parentNode.removeChild(elements[0]);
+  while (elements.length > 0) {
+    elements[0].parentNode.removeChild(elements[0]);
   }
 }
 
@@ -38,7 +45,7 @@ const showRepos = (data) => {
     const repoLanguage = document.createElement('small')
     const linkRepo = document.createElement('a')
 
-    divCardBody.classList.add('card-body', 'card-repo')
+    divCardBody.classList.add('card-body', 'card-repo', 'mb-5')
     repoName.classList.add('card-title')
     repoDescription.classList.add('card-text')
     repoLanguage.classList.add('text-muted')
@@ -49,6 +56,9 @@ const showRepos = (data) => {
     repoDescription.innerText = repo.description
     repoLanguage.innerText = repo.language
 
+    linkRepo.innerText = 'Open'
+    linkRepo.setAttribute('href', `${repo.html_url}`)
+
     repoContainer.appendChild(divCardBody)
     divCardBody.appendChild(repoName)
     divCardBody.appendChild(repoDescription)
@@ -58,46 +68,38 @@ const showRepos = (data) => {
   })
 }
 
-searchBtn.addEventListener('click', (e) => {
-  if (gitUser.value.length !== 0) {
+function getUserData(user) {
+  // get user from github
+  fetch(`https://api.github.com/users/${user}`, options)
+    .then(response => {
+      if (response.status === 404) {
+        document.querySelector('#user-not-found').classList.remove('hide')
+        userContainer.classList.add('hide')
+      } else {
+        document.querySelector('#user-not-found').classList.add('hide')
+      }
+      return response.json()
+        .then(data => showData(data))
+    })
+    .catch(e => console.log('Error: ' + e.message))
+
+  // get repos from github
+  fetch(`https://api.github.com/users/${user}/repos`, options)
+    .then(response => {
+      response.json()
+        .then(data => showRepos(data))
+    })
+    .catch(e => console.log('Error: ' + e.message))
+}
+
+
+searchBtn.addEventListener('click', () => {
+  if (document.querySelector('.repos')) {
     removeElementsByClass('card-repo')
     repoContainer.classList.remove('repos')
-    
-    const options = {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'default'
-    }
-
-    fetch(`https://api.github.com/users/${gitUser.value}`, options)
-      .then(response => {
-        if (response.status === 404) {
-          alert('User not found!')
-          userContainer.classList.add('hide')
-        }
-         
-
-        return response.json()
-          .then(data => showData(data))
-      })
-      .catch(e => console.log('Error: ' + e.message))
   }
-})
 
-//ps: deve chamar o getRepo quando fiquer request na api do github
-getRepo.addEventListener('click', (e) => {
-  if (!document.querySelector('.repos')) {
-    const options = {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'default'
-    }
-
-    fetch(`https://api.github.com/users/${gitUser.value}/repos`, options)
-      .then(response => {
-        response.json()
-          .then(data => showRepos(data))
-      })
-      .catch(e => console.log('Error: ' + e.message))
+  if (gitUser.value.length !== 0) {
+    getUserData(gitUser.value)
   }
 })
