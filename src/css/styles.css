@@ -8,6 +8,6 @@
   display: none;
 }
 
-.main-container {
+#main-container {
   max-width: 400px;
 }

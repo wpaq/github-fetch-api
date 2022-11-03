@@ -1,6 +1,6 @@
+const mainContainer = document.querySelector('#main-container')
 const userContainer = document.querySelector('#user-container')
 const repoContainer = document.querySelector('#repo-container')
-const mainContainer = document.querySelector('.main-container')
 
 const gitUser = document.querySelector('#git-user')
 const searchBtn = document.querySelector('#search-btn')
