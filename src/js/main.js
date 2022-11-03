@@ -2,12 +2,13 @@ const mainContainer = document.querySelector('#main-container')
 const userContainer = document.querySelector('#user-container')
 const repoContainer = document.querySelector('#repo-container')
 
-const gitUser = document.querySelector('#git-user')
+const gitUserName = document.querySelector('#git-user')
 const searchBtn = document.querySelector('#search-btn')
 const avatarUrl = document.querySelector('#avatar_url')
 
 const getRepo = document.querySelector('#get-repo')
-const gitName = document.querySelector('#git-name')
+const userNotFound = document.querySelector('#user-not-found')
+
 
 // cors
 const options = {
@@ -23,20 +24,48 @@ function removeElementsByClass(className) {
   }
 }
 
-const showData = (user) => {
-  for (const campo in user) {
+function getUserInfo (userName) {
+  fetch(`https://api.github.com/users/${userName}`, options)
+    .then(response => {
+      switch (response.status) {
+        case 403:
+          console.log('Limite de requests')
+      }
+      if (response.status === 404) {
+        userNotFound.classList.remove('hide')
+        userContainer.classList.add('hide')
+      } else {
+        userNotFound.classList.add('hide')
+      }
+      return response.json()
+        .then(data => showUserInfo(data))
+    })
+    .catch(e => console.log('Error: ' + e.message))
+}
+
+function getUserReposInfo(userName) {
+  fetch(`https://api.github.com/users/${userName}/repos`, options)
+    .then(response => {
+      response.json()
+        .then(data => showReposInfo(data))
+    })
+    .catch(e => console.log('Error: ' + e.message))
+}
+
+function showUserInfo(data) {
+  for (const campo in data) {
     if (document.querySelector('#' + campo)) {
 
       if (document.querySelector('#' + campo).nodeName === 'IMG') {
-        avatarUrl.setAttribute('src', user[campo])
+        avatarUrl.setAttribute('src', data[campo])
       }
-      document.querySelector('#' + campo).innerText = user[campo]
+      document.querySelector('#' + campo).innerText = data[campo]
       userContainer.classList.remove('hide')
     }
   }
 }
 
-const showRepos = (data) => {
+function showReposInfo(data) {
   data.map((repo) => {
     const divCardBody = document.createElement('div')
     const repoName = document.createElement('h5')
@@ -68,38 +97,24 @@ const showRepos = (data) => {
   })
 }
 
-function getUserData(user) {
-  // get user from github
-  fetch(`https://api.github.com/users/${user}`, options)
-    .then(response => {
-      if (response.status === 404) {
-        document.querySelector('#user-not-found').classList.remove('hide')
-        userContainer.classList.add('hide')
-      } else {
-        document.querySelector('#user-not-found').classList.add('hide')
-      }
-      return response.json()
-        .then(data => showData(data))
-    })
-    .catch(e => console.log('Error: ' + e.message))
-
-  // get repos from github
-  fetch(`https://api.github.com/users/${user}/repos`, options)
-    .then(response => {
-      response.json()
-        .then(data => showRepos(data))
-    })
-    .catch(e => console.log('Error: ' + e.message))
-}
-
-
 searchBtn.addEventListener('click', () => {
+  // collapse bootstrap bug resolve
+  if (repoContainer.classList.contains('show')) {
+    repoContainer.classList.remove('show')
+    getRepo.classList.add('collapsed')
+    getRepo.setAttribute('aria-expanded', 'false')
+  }
+
   if (document.querySelector('.repos')) {
     removeElementsByClass('card-repo')
     repoContainer.classList.remove('repos')
   }
 
-  if (gitUser.value.length !== 0) {
-    getUserData(gitUser.value)
+  if (gitUserName.value.length !== 0) {
+    getUserInfo(gitUserName.value)
   }
+})
+
+getRepo.addEventListener('click', () => {
+  getUserReposInfo(gitUserName.value)
 })
