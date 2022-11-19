@@ -1,7 +1,7 @@
 # GitHub FetchAPI
 
 ## Descrição do Projeto
-<p >Sistema onde coloquei em prática meus estudos sobre o fetchAPI fazendo uso da API pública do GitHub</p>
+<p >Sistema onde coloquei em prática meus estudos sobre o Fetch API fazendo uso da API pública do GitHub</p>
 
 <h4 align=""> 
 	🚀 Concluído!
