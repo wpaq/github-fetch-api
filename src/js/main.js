@@ -2,13 +2,11 @@ const mainContainer = document.querySelector('#main-container')
 const userContainer = document.querySelector('#user-container')
 const repoContainer = document.querySelector('#repo-container')
 
-const gitUserName = document.querySelector('#git-user')
-const searchBtn = document.querySelector('#search-btn')
+const username = document.querySelector('#github-username')
 const avatarUrl = document.querySelector('#avatar_url')
-
-const getRepo = document.querySelector('#get-repo')
 const userNotFound = document.querySelector('#user-not-found')
-
+const getRepo = document.querySelector('#get-repo')
+const searchBtn = document.querySelector('#search-btn')
 
 // cors
 const options = {
@@ -24,12 +22,11 @@ function removeElementsByClass(className) {
   }
 }
 
-function getUserInfo (userName) {
-  fetch(`https://api.github.com/users/${userName}`, options)
+function getUserInfo(username) {
+  fetch(`https://api.github.com/users/${username}`, options)
     .then(response => {
-      switch (response.status) {
-        case 403:
-          console.log('Limite de requests')
+      if (response.status === 403) {
+        alert('Request Limit!')
       }
       if (response.status === 404) {
         userNotFound.classList.remove('hide')
@@ -38,35 +35,34 @@ function getUserInfo (userName) {
         userNotFound.classList.add('hide')
       }
       return response.json()
-        .then(data => showUserInfo(data))
+        .then(userData => showUserInfo(userData))
     })
     .catch(e => console.log('Error: ' + e.message))
 }
 
-function getUserReposInfo(userName) {
-  fetch(`https://api.github.com/users/${userName}/repos`, options)
+function getUserReposInfo(username) {
+  fetch(`https://api.github.com/users/${username}/repos`, options)
     .then(response => {
       response.json()
-        .then(data => showReposInfo(data))
+        .then(reposData => showReposInfo(reposData))
     })
     .catch(e => console.log('Error: ' + e.message))
 }
 
-function showUserInfo(data) {
-  for (const campo in data) {
-    if (document.querySelector('#' + campo)) {
-
-      if (document.querySelector('#' + campo).nodeName === 'IMG') {
-        avatarUrl.setAttribute('src', data[campo])
+function showUserInfo(userData) {
+  for (const fields in userData) {
+    if (document.querySelector('#' + fields)) {
+      if (document.querySelector('#' + fields).nodeName === 'IMG') {
+        avatarUrl.setAttribute('src', userData[fields])
       }
-      document.querySelector('#' + campo).innerText = data[campo]
+      document.querySelector('#' + fields).innerText = userData[fields]
       userContainer.classList.remove('hide')
     }
   }
 }
 
-function showReposInfo(data) {
-  data.map((repo) => {
+function showReposInfo(reposData) {
+  for (fields in reposData) {
     const divCardBody = document.createElement('div')
     const repoName = document.createElement('h5')
     const repoDescription = document.createElement('p')
@@ -81,12 +77,12 @@ function showReposInfo(data) {
     linkRepo.classList.add('btn', 'btn-primary')
     repoContainer.classList.add('repos')
 
-    repoName.innerText = repo.name
-    repoDescription.innerText = repo.description
-    repoLanguage.innerText = repo.language
+    repoName.innerText = reposData[fields].name
+    repoDescription.innerText = reposData[fields].description
+    repoLanguage.innerText = reposData[fields].language
 
     linkRepo.innerText = 'Open'
-    linkRepo.setAttribute('href', `${repo.html_url}`)
+    linkRepo.setAttribute('href', `${reposData[fields].html_url}`)
 
     repoContainer.appendChild(divCardBody)
     divCardBody.appendChild(repoName)
@@ -94,7 +90,7 @@ function showReposInfo(data) {
     divCardBody.appendChild(p)
     p.appendChild(repoLanguage)
     divCardBody.appendChild(linkRepo)
-  })
+  }
 }
 
 searchBtn.addEventListener('click', () => {
@@ -110,11 +106,11 @@ searchBtn.addEventListener('click', () => {
     repoContainer.classList.remove('repos')
   }
 
-  if (gitUserName.value.length !== 0) {
-    getUserInfo(gitUserName.value)
+  if (username.value.length !== 0) {
+    getUserInfo(username.value)
   }
 })
 
 getRepo.addEventListener('click', () => {
-  getUserReposInfo(gitUserName.value)
+  getUserReposInfo(username.value)
 })
