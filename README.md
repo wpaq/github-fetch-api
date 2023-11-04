@@ -1,39 +1,22 @@
-# GitHub FetchAPI
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
 
-## Descrição do Projeto
-<p >Sistema onde coloquei em prática meus estudos sobre o Fetch API fazendo uso da API pública do GitHub</p>
+## GitHub FetchAPI :computer:
 
-<h4 align=""> 
-	🚀 Concluído!
-</h4>
+Sistema onde coloquei em prática meus estudos sobre o Fetch API fazendo uso da API pública do GitHub
 
-<br>
 
-### 🛠 Tecnologias
+## Rodando a aplicação
 
-As seguintes ferramentas foram usadas na construção do projeto:
+1. Faça o clone do repositório
+2. Abra o arquivo index.html no navegador
+
+## Tecnologias utilizadas :rocket:
 
 - [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 - [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
 - [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 
-<br>
 
-### Demo
+## Demo
 https://github-fetch-api-wpaq.netlify.app/
-
-<br>
-
-### Developer
----
-
-<a href="https://github.com/wpaq">
- <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/42584214?s=60&v=4" width="100px;" alt=""/>
- <br />
- <sub><b>Wallyson Pablo</b></sub></a> 
-
-
-Quer bater um papo? Segue abaixo meus contatos!
-
-[![Linkedin Badge](https://img.shields.io/badge/-Wallyson-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/wallyson-pablo)](https://www.linkedin.com/in/wallyson-pablo-bbb361184/) 
-[![Gmail Badge](https://img.shields.io/badge/-wallysonpabloo@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:wallysonpabloo@gmail.com)](mailto:wallysonpabloo@gmail.com)
