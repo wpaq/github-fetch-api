@@ -9,7 +9,7 @@ Sistema onde coloquei em prática meus estudos sobre o Fetch API fazendo uso da 
 ## Rodando a aplicação
 
 1. Faça o clone do repositório
-2. Abra o arquivo index.html no navegador
+2. Abra o arquivo `index.html` no navegador
 
 ## Tecnologias utilizadas :rocket:
 
